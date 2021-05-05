@@ -74,3 +74,12 @@ typings/
 
 # FuseBox cache
 .fusebox/
+
+# ReScript
+.merlin
+.bsb.lock
+npm-debug.log
+/lib/bs/
+/lib/ocaml/
+/node_modules/
+/bundleOutput/
