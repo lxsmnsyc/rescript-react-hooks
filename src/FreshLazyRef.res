@@ -1,10 +1,9 @@
 let use = (supplier: unit => 'a, dependency: 'b, shouldUpdate: ('b, 'b) => bool): React.ref<'a> => {
   let value = LazyRef.use(supplier);
-  let deps = React.useRef(dependency);
+  let dependencyChanged = DependencyChanged.use(dependency, shouldUpdate);
 
-  if (shouldUpdate(deps.current, dependency)) {
+  if (dependencyChanged) {
     value.current = supplier();
-    deps.current = dependency;
   }
 
   value;
