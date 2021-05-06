@@ -1,5 +1,14 @@
-let use = (supplier: () => 'a): React.ref<'a> => {
-  Constant.use((): React.ref<'a> => {
-    current: supplier()
-  });
-}
+let use = (supplier: unit => 'a): React.ref<'a> => {
+  let ref = React.useRef(None);
+
+  switch (ref.current) {
+    | Some(value) => value;
+    | None => {
+      let value: React.ref<'a> = {
+        current: supplier()
+      };
+      ref.current = Some(value);
+      value;
+    }
+  };
+};
